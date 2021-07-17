@@ -1,0 +1,15 @@
+python v2_train.py --loss "mse" --kernel_forward "rbf" --forward "x" --device 1
+python v2_train.py --loss "mse" --kernel_forward "rbf" --forward "f" --device 1
+python v2_train.py --loss "mse" --kernel_forward "rbf" --forward "n" --device 1
+
+python v2_train.py --loss "mse" --kernel_forward "student" --forward "x" --device 1
+python v2_train.py --loss "mse" --kernel_forward "student" --forward "f" --device 1
+python v2_train.py --loss "mse" --kernel_forward "student" --forward "n" --device 1
+
+python v2_train.py --loss "mse" --kernel_forward "rbf" --forward "x" --bn_affine 1 --device 1
+python v2_train.py --loss "mse" --kernel_forward "rbf" --forward "f" --bn_affine 1 --device 1
+python v2_train.py --loss "mse" --kernel_forward "rbf" --forward "n" --bn_affine 1 --device 1
+
+python v2_train.py --loss "mse" --kernel_forward "student" --forward "x" --bn_affine 1 --device 1
+python v2_train.py --loss "mse" --kernel_forward "student" --forward "f" --bn_affine 1 --device 1
+python v2_train.py --loss "mse" --kernel_forward "student" --forward "n" --bn_affine 1 --device 1
