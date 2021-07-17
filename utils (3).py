@@ -10,13 +10,21 @@ def kernel_matrix(x : torch.Tensor, sigma):
         return torch.exp( -0.5 * torch.sum(torch.pow(x1-x2, 2), axis=axis) / sigma**2)
     else:
         return torch.exp( -0.5 * torch.pow(x1-x2, 2) / sigma**2)
+
+def kernel_student(x : torch.Tensor, sigma):
+    dim = len(x.size())
+    m = x.size(0)
+    x1  = torch.unsqueeze(x, 0)
+    x2  = torch.unsqueeze(x, 1)
+    axis= tuple(range(2, dim+1))
+    return 1/(sigma + torch.mean(torch.pow(x1-x2, 2), axis=axis))*sigma
     
 def HSIC(Kx, Ky, m):
     xy = torch.matmul(Kx, Ky)
     h  = torch.trace(xy) / m**2 + torch.mean(Kx)*torch.mean(Ky) - \
         2 * torch.mean(xy)/m
     return h*(m/(m-1))**2 
-    
+
 def mean(K):
     return K - torch.mean(K, 1, keepdim=True)
 def norm_HSIC(Kx, Ky, m, device):
@@ -28,6 +36,8 @@ def norm_HSIC(Kx, Ky, m, device):
     Ry = (Kyc.mm(Kyi))
     Pxy = torch.mean(torch.mul(Rx, Ry.t()))
     return Pxy
+
+    
 
 def load_data(batch_size, download=False):
     
