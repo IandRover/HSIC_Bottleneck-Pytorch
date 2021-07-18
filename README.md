@@ -11,6 +11,8 @@ For research interests,
 1. I wonder the difference in applying student-t distribution as kernel, so one can use  ```--kernel_x "rbf" --kernel_y "rbf"``` to specify the kernel.
 2. I also curious about if dropping the HSIC(X,Z_i) term or substituting it with HSIC(Z_{i-1},Z_i) yields non-inferior performance. Excitingly, the answer seems affirmative (for now XD).
 
+Currently not supporting convolution model.
+
 ### Dependencies
 
 * torch 1.9.0
