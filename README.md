@@ -29,20 +29,12 @@ python v3_train.py --loss "CE" --forward "x" --kernel_x "rbf" --kernel_y "rbf"
 ## Authors
 Chia-Hsiang Kao
 
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
 ## License
 
 This project is licensed under the [MIT] License
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
-* [original work](https://github.com/choasma/HSIC-bottleneck)
-* [pytorch implementation](https://github.com/gusye1234/Pytorch-HSIC-bottleneck)
+* [Original paper](https://arxiv.org/pdf/1908.01580.pdf)
+* [Original work](https://github.com/choasma/HSIC-bottleneck)
+* [Pytorch implementation](https://github.com/gusye1234/Pytorch-HSIC-bottleneck)
