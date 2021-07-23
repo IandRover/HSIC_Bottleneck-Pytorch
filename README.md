@@ -19,20 +19,15 @@ Currently not supporting convolution model.
 * torchvision 0.10.0
 
 ### Executing program
+\\ ```
+\\ python v3_train.py --loss "CE" --forward "x" --kernel_x "rbf" --kernel_y "rbf"
+\\ ```
+please refer to the .ipynb file.
 
-```
-. train1.txt
-```
-
-or 
-```
-python v3_train.py --loss "CE" --forward "x" --kernel_x "rbf" --kernel_y "rbf"
-```
 ## Authors
 Chia-Hsiang Kao
 
 ## License
-
 This project is licensed under the [MIT] License
 
 ## Acknowledgments
