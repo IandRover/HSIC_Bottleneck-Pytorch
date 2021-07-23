@@ -3,11 +3,17 @@ from torch import nn
 from torchvision import datasets, transforms
 
 def get_filename(args):
-    filename = "{}_{}_F{}_{}{}{}_S{}L{}".format(args.dataset, args.loss, args.forward, args.kernel_x[0], args.kernel_h[0], args.kernel_y[0], args.sigma_, args.lambda_, )
-    
+    if args.BP == 1:
+        filename = "{}_{}_{}".format(args.dataset, args.model, args.loss)
+    else:
+        filename = "{}_{}_{}_F{}_{}{}{}_S{}L{}".format(args.dataset, args.model, args.loss, args.forward, args.kernel_x[0], args.kernel_h[0], args.kernel_y[0], args.sigma_, args.lambda_, )
     if args.bn_affine == 1:
         filename += "_bn"
-        
+    if args.Latinb == 1:
+        try:
+            filename += "_Latinb{}{}".format(args.Latinb_type, args.Latinb_lambda)
+        except:
+            filename += "_Latinb{}".format(args.Latinb_lambda)
     return filename
 
 def show_result(hsic, train_loader, test_loader, epoch, logs, device):

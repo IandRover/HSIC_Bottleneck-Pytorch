@@ -1,8 +1,6 @@
 import torch
 from torch import nn
 from torchvision import datasets, transforms
-import numpy as np
-import torch.nn.functional as F
 
 class compute_kernel(nn.Module):
     def __init__(self):
@@ -44,26 +42,3 @@ class compute_HSIC(nn.Module):
     def forward(self, Kx, Ky, m, device):
         if self.kerneltype == "nHSIC": return self.norm_HSIC(Kx, Ky, m, device)
         elif self.kerneltype == "HSIC": return self.norm_HSIC(Kx, Ky, m)
-        
-# by lateral inhibition: a feature inhibits laterally long-range same feature
-def draw_with_contraint(r, d, c):
-    """r: range; d: distance, c:counts"""
-    buffer = list()
-    for i in range(c*100):
-        a, b, e, f = np.random.randint(0, r), np.random.randint(0, r), np.random.randint(0, r), np.random.randint(0, r)
-        if np.linalg.norm((a-b,e-f)) >= d:
-            buffer.append([a,b,e,f])
-            if len(buffer) >= c:
-                return np.array(buffer)
-def spatial_contrast(features, args):
-    bs, cs, ws, hs = features.size()
-    n_samples = 10
-    coordinates = draw_with_contraint(ws, np.sqrt(ws), n_samples)
-    x = features[:,:,coordinates[:,0],coordinates[:,1]]
-    x = x.permute(1,0,2).reshape((cs, bs*n_samples)) # [cs, bs*n_sample]
-    y = features[:,:,coordinates[:,2],coordinates[:,3]]
-    y = y.permute(1,0,2).reshape((cs, bs*n_samples)) # [cs, bs*n_sample]
-    x = F.normalize(x, p=2, dim=0)
-    y = F.normalize(y, p=2, dim=0)
-    if args.Latinb_type == "n": return torch.mean(torch.trace(torch.mm(torch.t(x), y)))
-    elif args.Latinb_type == "f": return torch.mean(torch.trace(torch.mm(y, torch.t(x))))
